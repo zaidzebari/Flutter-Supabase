@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_supabase/constant.dart';
 import 'package:flutter_supabase/providers/index.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Supabase.initialize(
+    url: SUPABASE_URL,
+    anonKey: SUPABASE_ANNON_KEY,
+    authCallbackUrlHostname: 'login-callback',
+  );
   runApp(MyApp());
 }
 
