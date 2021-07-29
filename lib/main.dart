@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => IndexProvider())],
       child: MaterialApp(
-        title: 'Flutter Firebase',
+        title: 'Flutter Supabase',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
