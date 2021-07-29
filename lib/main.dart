@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_supabase/constant.dart';
-import 'package:flutter_supabase/pages/splash_page.dart';
+import 'package:flutter_supabase/pages/add_todos.dart';
+import 'package:flutter_supabase/pages/delete_todo.dart';
+import 'package:flutter_supabase/pages/show_todos.dart';
+import 'package:flutter_supabase/pages/udpate_todo.dart';
 import 'package:flutter_supabase/providers/index.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-import 'auth/login.dart';
-import 'pages/account_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,13 +30,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        // home: MyHomePage(),
-        initialRoute: '/',
-        routes: <String, WidgetBuilder>{
-          '/': (_) => const SplashPage(),
-          '/login': (_) => const LoginPage(),
-          '/account': (_) => const AccountPage(),
-        },
+        home: MyHomePage(),
       ),
     );
   }
@@ -53,8 +47,41 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("go a way zaid!"),
+      appBar: AppBar(),
+      body: ListView(
+        children: [
+          Center(
+            child: Text("go a way zaid!"),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ShowTodosScreen()));
+            },
+            child: Text("goto show page"),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => AddTodosScreen()));
+            },
+            child: Text("goto add page"),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => UpdateTodoScreen()));
+            },
+            child: Text("goto udpate page"),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => DeleteTodoScreen()));
+            },
+            child: Text("goto delete page"),
+          ),
+        ],
       ),
     );
   }
