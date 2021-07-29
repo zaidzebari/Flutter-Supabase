@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_supabase/constant.dart';
+import 'package:flutter_supabase/pages/splash_page.dart';
 import 'package:flutter_supabase/providers/index.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'auth/login.dart';
+import 'pages/account_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +30,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(),
+        // home: MyHomePage(),
+        initialRoute: '/',
+        routes: <String, WidgetBuilder>{
+          '/': (_) => const SplashPage(),
+          '/login': (_) => const LoginPage(),
+          '/account': (_) => const AccountPage(),
+        },
       ),
     );
   }
