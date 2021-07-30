@@ -33,7 +33,7 @@ dependencies:
   provider: ^5.0.0
 
   # api data
-  supabase_flutter: ^0.0.6
+  # supabase_flutter: ^0.0.6
   supabase: ^0.0.7
 
 dev_dependencies:

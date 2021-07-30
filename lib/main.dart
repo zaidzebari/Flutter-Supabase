@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_supabase/constant.dart';
+import 'package:flutter_supabase/auth/login.dart';
+import 'package:flutter_supabase/auth/register.dart';
 import 'package:flutter_supabase/pages/add_todos.dart';
 import 'package:flutter_supabase/pages/delete_todo.dart';
 import 'package:flutter_supabase/pages/show_todos.dart';
 import 'package:flutter_supabase/pages/udpate_todo.dart';
 import 'package:flutter_supabase/providers/index.dart';
 import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  Supabase.initialize(
-    url: SUPABASE_URL,
-    anonKey: SUPABASE_ANNON_KEY,
-    authCallbackUrlHostname: 'login-callback',
-  );
   runApp(MyApp());
 }
 
@@ -80,6 +73,32 @@ class _MyHomePageState extends State<MyHomePage> {
                   MaterialPageRoute(builder: (context) => DeleteTodoScreen()));
             },
             child: Text("goto delete page"),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+            },
+            child: Text("login page"),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => RegisterScreen()));
+            },
+            child: Text("goto register page"),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              Provider.of<IndexProvider>(context, listen: false).logout();
+            },
+            child: Text("logout"),
+          ),
+          OutlinedButton(
+            onPressed: () {
+              Provider.of<IndexProvider>(context, listen: false).currentUser();
+            },
+            child: Text("current user"),
           ),
         ],
       ),

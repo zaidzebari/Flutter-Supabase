@@ -27,4 +27,34 @@ class IndexProvider extends ChangeNotifier {
     var response = await supabase.from('todos').delete().eq('id', 3).execute();
     print(response.data);
   }
+
+  Future<void> login() async {
+    var responsive =
+        await supabase.auth.signIn(email: EMAIL.trim(), password: 'zaiditit');
+    print(responsive.data?.user?.id);
+    print(responsive.data?.user?.email);
+    if (responsive.error != null) {
+      print(responsive.error?.message);
+    }
+  }
+
+  Future<void> register() async {
+    print('called sign up');
+    var responsive =
+        await supabase.auth.signUp(EMAIL.trim(), 'zaiditit'.trim());
+    print(responsive.data?.user?.id);
+    print(responsive.data?.user?.email);
+    if (responsive.error != null) {
+      print(responsive.error?.message);
+    }
+  }
+
+  Future<void> logout() async {
+    var responsive = await supabase.auth.signOut();
+    print(responsive.rawData);
+  }
+
+  void currentUser() {
+    print(supabase.auth.currentUser?.id);
+  }
 }
