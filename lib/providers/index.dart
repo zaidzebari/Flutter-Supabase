@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_supabase/constant.dart';
 
@@ -12,6 +14,13 @@ class IndexProvider extends ChangeNotifier {
       {'text': 'adding another content', 'user_id': '1'}
     ]).execute();
     print(response.data);
+  }
+
+  // just test for one to many example and it is own
+  Future<void> getTodoChild() async {
+    var data =
+        await supabase.from('todos').select('*, todo_child(*)').execute();
+    print(jsonEncode(data.data));
   }
 
   Future<void> updateTodo() async {
@@ -56,5 +65,6 @@ class IndexProvider extends ChangeNotifier {
 
   void currentUser() {
     print(supabase.auth.currentUser?.id);
+    print(supabase.auth.currentSession?.accessToken);
   }
 }
