@@ -37,6 +37,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final String image = "https://url?token=token";
+  //  'https://media.istockphoto.com/photos/programming-code-abstract-technology-background-of-software-developer-picture-id1224500457?b=1&k=6&m=1224500457&s=170667a&w=0&h=vqI3oI36-whsMrK1Ynw_yR9Ndy_C4zA5qYSI0vmxbus=';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,6 +102,18 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             child: Text("current user"),
           ),
+          OutlinedButton(
+            onPressed: () async {
+              await Provider.of<IndexProvider>(context, listen: false)
+                  .uploadImage();
+              print('finished');
+            },
+            child: Text("upload image to supabase"),
+          ),
+          Image.network(
+            '$image',
+            height: 200,
+          )
         ],
       ),
     );

@@ -1,7 +1,9 @@
 import 'dart:convert';
-
+import 'dart:io';
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_supabase/constant.dart';
+import 'package:image_picker/image_picker.dart';
 
 class IndexProvider extends ChangeNotifier {
   Future<void> getTodos() async {
@@ -66,5 +68,24 @@ class IndexProvider extends ChangeNotifier {
   void currentUser() {
     print(supabase.auth.currentUser?.id);
     print(supabase.auth.currentSession?.accessToken);
+  }
+
+  Future<String?> uploadImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
+    if (photo != null) {
+      File file = new File(photo.path);
+      var response =
+          await supabase.storage.from('avatars').upload('zaid', file);
+      print(response.error?.message);
+      print('first');
+      print(response.data);
+      print('second');
+      if (response.data != null) {
+        return response.data;
+      } else {
+        return '';
+      }
+    }
   }
 }
